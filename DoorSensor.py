@@ -28,7 +28,7 @@ def start_recording():
             door_state_file.close()
 
             # UPDATE THE WEBSITE
-            update_command = "censored haha nice try guy"
+            update_command = "haha nope"
             # subprocess.call(['curl', '-k', update_command], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             # subprocess.call(['curl', '-k', update_command])
             os.system(update_command)
