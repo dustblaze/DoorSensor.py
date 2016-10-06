@@ -4,6 +4,7 @@ __author__ = 'jayman555'
 import time
 import datetime
 import random
+import os
 
 # I chose these filenames because they are so similar I want someone to get confused
 statistics_fn = "door_stats.txt"
@@ -12,11 +13,11 @@ door_pin = 2
 
 
 def start_recording():
-    previous_state = "CLOSED"
+    previous_state = "closed"
     while True:
         # Get the door state
         door_state = bool(random.getrandbits(1)) # GPIO.input(door_pin)
-        door_state = "OPEN" if door_state else "CLOSED"
+        door_state = "open" if door_state else "closed"
 
         # Overwrite the door state in the file, only if its changed
         if previous_state != door_state:
@@ -24,8 +25,9 @@ def start_recording():
             door_state_file.write(door_state)
             door_state_file.close()
 
-            # TODO: UPDATE THE WEBSITE
-
+            # UPDATE THE WEBSITE
+            update_command = "curl -k https://cs.club.anu.edu.au/files/doorstate/set.php\?key\=PHO9nofEfXdUMLnu7ReSoRgpDgOTwgY\&state\={0}".format(door_state)
+            os.system(update_command)
 
             # Dump the door state to a file for analysis later
             timestamp = time.time()
