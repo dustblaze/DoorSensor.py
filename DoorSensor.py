@@ -5,6 +5,7 @@ import time
 import datetime
 import random
 import os
+import subprocess
 
 # I chose these filenames because they are so similar I want someone to get confused
 statistics_fn = "door_stats.txt"
@@ -27,6 +28,8 @@ def start_recording():
 
             # UPDATE THE WEBSITE
             update_command = "curl -k https://cs.club.anu.edu.au/files/doorstate/set.php\?key\=PHO9nofEfXdUMLnu7ReSoRgpDgOTwgY\&state\={0}".format(door_state)
+            # subprocess.call(['curl', '-k', update_command], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            # subprocess.call(['curl', '-k', update_command])
             os.system(update_command)
 
             # Dump the door state to a file for analysis later
